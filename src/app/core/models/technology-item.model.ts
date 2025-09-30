@@ -1,0 +1,11 @@
+export interface TechnologyItem {
+  name: string;
+  description: string;
+  type: 'language' | 'markup' | 'style' | 'framework' | 'tool';
+  side: 'client' | 'server' | 'both';
+  author: string;
+  latestVersion: string;
+  officialSite: string;
+  openSource: boolean;
+  logo: string;
+}
