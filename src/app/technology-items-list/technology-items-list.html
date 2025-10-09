@@ -1,0 +1,8 @@
+<div class="container my-4 px-1 pb-5 mb-5">
+  <div *ngIf="!items.length">No items loaded!</div>
+  <div class="row row-cols-4 g-4">
+    <div class="col" *ngFor="let item of items">
+      <app-technology-item-card [item]="item"></app-technology-item-card>
+    </div>
+  </div>
+</div>
