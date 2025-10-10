@@ -13,4 +13,17 @@ import { TECHNOLOGY_ITEMS } from '../mock-data/technology-items';
 })
 export class TechnologyItemsList {
   items: TechnologyItem[] = TECHNOLOGY_ITEMS;
+  showDetails(item: TechnologyItem) {
+    console.log(
+      `Details:
+    - Name: ${item.name}
+    - Description: ${item.description}
+    - Type: ${item.type}
+    - Side: ${item.side}
+    - Author: ${item.author}
+    - Latest version: ${item.latestVersion}
+    - Official site: ${item.officialSite}
+    - License: ${item.openSource ? 'Open Source' : 'Proprietary'}`
+    );
+  }
 }
