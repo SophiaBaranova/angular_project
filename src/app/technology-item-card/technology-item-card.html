@@ -15,6 +15,13 @@
     <p class="card-text">
       <small class="text-muted">Author: {{ item.author }}</small>
     </p>
-    <a *ngIf="item.officialSite" [href]="item.officialSite" target="_blank" class="btn btn-primary">Official site</a>
+    <div class="d-flex justify-content-between">
+      <a *ngIf="item.officialSite" [href]="item.officialSite" target="_blank" class="btn btn-primary flex-fill me-2">
+        Official site
+      </a>
+      <button (click)="onShowDetails()" class="btn btn-warning flex-fill">
+        Details
+      </button>
+    </div>
   </div>
 </div>
