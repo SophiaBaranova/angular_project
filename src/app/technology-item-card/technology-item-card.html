@@ -1,7 +1,13 @@
-<div class="card" style="width: 18rem;">
+<div class="card"
+     [ngStyle]="isNew() ?
+        {'border': '2px solid limegreen', 'box-shadow': '0 0 10px limegreen'} : {}"
+     style="width: 18rem;">
   <img [src]="'assets/' + item.logo" class="card-img-top img-fluid"  alt="technology logo">
   <div class="card-body">
-    <h5 class="card-title">{{ item.name }}</h5>
+    <h5 class="card-title">
+      {{ item.name }}
+      <span *ngIf="isNew()" class="badge bg-success ms-2">New!</span>
+    </h5>
     <p class="card-text">
       <strong>Type: </strong>{{ item.type }} |
       <strong>Side: </strong>{{ item.side }}

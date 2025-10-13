@@ -11,4 +11,14 @@ import { TechnologyItem } from '../core/models/technology-item.model';
 })
 export class TechnologyItemCard {
   @Input() item!: TechnologyItem;
+  isNew(): boolean {
+    if (!this.item?.lastUpdated) return false;
+    const lastUpdated = new Date(this.item.lastUpdated);
+    const now = new Date();
+    //get difference in ms
+    const diffInMs = now.getTime() - lastUpdated.getTime();
+    //convert difference into days
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    return diffInDays <= 90;
+  }
 }
