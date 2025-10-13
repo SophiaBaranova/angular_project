@@ -11,6 +11,7 @@ import { TechnologyItem } from '../core/models/technology-item.model';
 })
 export class TechnologyItemCard {
   @Input() item!: TechnologyItem;
+  @Input() isRecommended!: boolean;
   @Output() detailsClickedEvent = new EventEmitter<TechnologyItem>();
   onShowDetails(){
     this.detailsClickedEvent.emit(this.item);

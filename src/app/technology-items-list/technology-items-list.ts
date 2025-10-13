@@ -14,6 +14,7 @@ import {Search} from '../search/search';
 })
 export class TechnologyItemsList {
   items: TechnologyItem[] = TECHNOLOGY_ITEMS;
+  userRole!: 'designer' | 'developer' | 'fullstack';
   searchText!: string;
   search(searchText: string){
     this.searchText = searchText.trim().toLowerCase();
@@ -21,6 +22,16 @@ export class TechnologyItemsList {
   get filteredItems(){
     if (!this.searchText) return this.items;
     return this.items.filter(item => item.name.toLowerCase().includes(this.searchText));
+  }
+  getRecommendedItems(item: TechnologyItem): boolean {
+    switch (this.userRole) {
+      case 'designer':
+        return item.type === 'markup' || item.type === 'style';
+      case 'developer':
+        return item.type === 'language' || item.type === 'framework';
+      default:
+        return false;
+    }
   }
   showDetails(item: TechnologyItem) {
     console.log(

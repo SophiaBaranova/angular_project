@@ -3,7 +3,7 @@
   <div *ngIf="!items.length">No items loaded!</div>
   <div class="row row-cols-4 g-4">
     <div class="col" *ngFor="let item of filteredItems">
-      <app-technology-item-card [item]="item" (detailsClickedEvent)="showDetails($event)"></app-technology-item-card>
+      <app-technology-item-card [item]="item" [isRecommended]="getRecommendedItems(item)" (detailsClickedEvent)="showDetails($event)"></app-technology-item-card>
     </div>
   </div>
 </div>
