@@ -3,7 +3,7 @@ import { TechnologyItem } from '../core/models/technology-item.model';
 export const TECHNOLOGY_ITEMS: TechnologyItem[] = [
   {
     name: 'HTML',
-    description: 'Мова розмітки для структури веб-сторінок',
+    description: 'A markup language for structuring web pages',
     type: 'markup',
     side: 'client',
     author: 'W3C / WHATWG',
@@ -14,7 +14,7 @@ export const TECHNOLOGY_ITEMS: TechnologyItem[] = [
   },
   {
     name: 'CSS',
-    description: 'Мова стилів для оформлення веб-сторінок',
+    description: 'A style language for designing web pages',
     type: 'style',
     side: 'client',
     author: 'W3C',
@@ -25,7 +25,7 @@ export const TECHNOLOGY_ITEMS: TechnologyItem[] = [
   },
   {
     name: 'JavaScript',
-    description: 'Мова програмування для клієнтських і серверних додатків',
+    description: 'A programming language for client and server applications',
     type: 'language',
     side: 'both',
     author: 'Brendan Eich',
@@ -36,7 +36,7 @@ export const TECHNOLOGY_ITEMS: TechnologyItem[] = [
   },
   {
     name: 'Angular',
-    description: 'Фреймворк для створення SPA-додатків',
+    description: 'A framework for building SPA applications',
     type: 'framework',
     side: 'client',
     author: 'Google',
@@ -47,7 +47,7 @@ export const TECHNOLOGY_ITEMS: TechnologyItem[] = [
   },
   {
     name: 'Node.js',
-    description: 'Середовище виконання JavaScript на сервері',
+    description: 'A JavaScript runtime environment on the server',
     type: 'tool',
     side: 'server',
     author: 'Ryan Dahl',
