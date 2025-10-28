@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TechnologyItem } from '../core/models/technology-item.model';
 import { TechnologyItemCard } from '../technology-item-card/technology-item-card';
 import { TECHNOLOGY_ITEMS } from '../mock-data/technology-items';
 import {Search} from '../search/search';
+import { TechnologyItemsService } from '../services/technology-items.service';
 
 @Component({
   selector: 'app-technology-items-list',
@@ -12,10 +13,14 @@ import {Search} from '../search/search';
   templateUrl: './technology-items-list.html',
   styleUrl: './technology-items-list.scss',
 })
-export class TechnologyItemsList {
-  items: TechnologyItem[] = TECHNOLOGY_ITEMS;
+export class TechnologyItemsList implements OnInit {
+  items: TechnologyItem[] = [];
   userRole!: 'designer' | 'developer' | 'fullstack';
   searchText!: string;
+  constructor(private technologyItemsService: TechnologyItemsService) {}
+  ngOnInit(): void {
+    this.items = this.technologyItemsService.getItems();
+  }
   search(searchText: string){
     this.searchText = searchText.trim().toLowerCase();
   }
