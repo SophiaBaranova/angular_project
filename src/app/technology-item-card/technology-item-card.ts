@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TechnologyItem } from '../core/models/technology-item.model';
 
@@ -11,6 +11,11 @@ import { TechnologyItem } from '../core/models/technology-item.model';
 })
 export class TechnologyItemCard {
   @Input() item!: TechnologyItem;
+  @Input() isRecommended!: boolean;
+  @Output() detailsClickedEvent = new EventEmitter<TechnologyItem>();
+  onShowDetails(){
+    this.detailsClickedEvent.emit(this.item);
+  }
   isNew(): boolean {
     if (!this.item?.lastUpdated) return false;
     const lastUpdated = new Date(this.item.lastUpdated);

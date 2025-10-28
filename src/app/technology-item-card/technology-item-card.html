@@ -2,9 +2,10 @@
      [ngStyle]="isNew() ?
         {'border': '2px solid limegreen', 'box-shadow': '0 0 10px limegreen'} : {}"
      style="width: 18rem;">
+  <div *ngIf="isRecommended" class="card-header" style="background-color: inherit; color: #dc3545; font-weight: bold; border-bottom: none;">Recommended for you</div>
   <img [src]="'assets/' + item.logo" class="card-img-top img-fluid"  alt="technology logo">
   <div class="card-body">
-    <h5 class="card-title">
+    <h5>
       {{ item.name }}
       <span *ngIf="isNew()" class="badge bg-success ms-2">New!</span>
     </h5>
@@ -15,6 +16,13 @@
     <p class="card-text">
       <small class="text-muted">Author: {{ item.author }}</small>
     </p>
-    <a *ngIf="item.officialSite" [href]="item.officialSite" target="_blank" class="btn btn-primary">Official site</a>
+    <div class="d-flex justify-content-between">
+      <a *ngIf="item.officialSite" [href]="item.officialSite" target="_blank" class="btn btn-primary flex-fill me-2">
+        Official site
+      </a>
+      <button (click)="onShowDetails()" class="btn btn-warning flex-fill">
+        Details
+      </button>
+    </div>
   </div>
 </div>

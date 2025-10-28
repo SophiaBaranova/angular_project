@@ -1,0 +1,18 @@
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid  px-3">
+    <form class="d-flex w-100" role="search">
+      <input name="searchText"
+             [(ngModel)]="searchText"
+             class="form-control me-2 flex-grow-1"
+             type="search"
+             placeholder="Search"
+             aria-label="Search" />
+      <button [ngClass]="{'btn': true, 'btn-primary': searchText}"
+              type="submit"
+              [disabled]="!searchText"
+              (click)="onSearchClicked()">
+        Search
+      </button>
+    </form>
+  </div>
+</nav>

@@ -1,8 +1,9 @@
+<app-search (searchClickedEvent)="search($event)" class="ms-auto"></app-search>
 <div class="container my-4 px-1 pb-5 mb-5">
   <div *ngIf="!items.length">No items loaded!</div>
   <div class="row row-cols-4 g-4">
-    <div class="col" *ngFor="let item of items">
-      <app-technology-item-card [item]="item"></app-technology-item-card>
+    <div class="col" *ngFor="let item of filteredItems">
+      <app-technology-item-card [item]="item" [isRecommended]="getRecommendedItems(item)" (detailsClickedEvent)="showDetails($event)"></app-technology-item-card>
     </div>
   </div>
 </div>
