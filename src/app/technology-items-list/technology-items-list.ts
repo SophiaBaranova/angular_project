@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TechnologyItem } from '../core/models/technology-item.model';
 import { TechnologyItemCard } from '../technology-item-card/technology-item-card';
-import { TECHNOLOGY_ITEMS } from '../mock-data/technology-items';
 import {Search} from '../search/search';
 import { TechnologyItemsService } from '../services/technology-items.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-technology-items-list',
@@ -17,14 +17,26 @@ export class TechnologyItemsList implements OnInit {
   items: TechnologyItem[] = [];
   userRole!: 'designer' | 'developer' | 'fullstack';
   searchText!: string;
+  subscription: Subscription | undefined;
   constructor(private technologyItemsService: TechnologyItemsService) {}
   ngOnInit(): void {
-    this.items = this.technologyItemsService.getItems();
+    this.subscription = this.technologyItemsService.getItems().subscribe({
+      next: (item) => {
+        this.items = item;
+      },
+      error: (err) => console.log(err),
+      complete: () => console.log('Technology items loaded successfully.')
+    });
   }
-  search(searchText: string){
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+  search(searchText: string): void {
     this.searchText = searchText.trim().toLowerCase();
   }
-  get filteredItems(){
+  get filteredItems(): TechnologyItem[] {
     if (!this.searchText) return this.items;
     return this.items.filter(item => item.name.toLowerCase().includes(this.searchText));
   }
@@ -38,7 +50,7 @@ export class TechnologyItemsList implements OnInit {
         return false;
     }
   }
-  showDetails(item: TechnologyItem) {
+  showDetails(item: TechnologyItem): void {
     console.log(
       `Details:
     - Name: ${item.name}
