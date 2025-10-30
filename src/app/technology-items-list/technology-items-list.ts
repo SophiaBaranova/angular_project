@@ -4,7 +4,7 @@ import { TechnologyItem } from '../core/models/technology-item.model';
 import { TechnologyItemCard } from '../technology-item-card/technology-item-card';
 import {Search} from '../search/search';
 import { TechnologyItemsService } from '../services/technology-items.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-technology-items-list',
@@ -13,32 +13,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './technology-items-list.html',
   styleUrl: './technology-items-list.scss',
 })
-export class TechnologyItemsList implements OnInit {
-  items: TechnologyItem[] = [];
+export class TechnologyItemsList {
+  items$: Observable<TechnologyItem[]>;
   userRole!: 'designer' | 'developer' | 'fullstack';
-  searchText!: string;
   subscription: Subscription | undefined;
-  constructor(private technologyItemsService: TechnologyItemsService) {}
-  ngOnInit(): void {
-    this.subscription = this.technologyItemsService.getItems().subscribe({
-      next: (item) => {
-        this.items = item;
-      },
-      error: (err) => console.log(err),
-      complete: () => console.log('Technology items loaded successfully.')
-    });
-  }
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-  search(searchText: string): void {
-    this.searchText = searchText.trim().toLowerCase();
-  }
-  get filteredItems(): TechnologyItem[] {
-    if (!this.searchText) return this.items;
-    return this.items.filter(item => item.name.toLowerCase().includes(this.searchText));
+  constructor(private technologyItemsService: TechnologyItemsService) {
+    this.items$ = this.technologyItemsService.getFilteredItems();
   }
   getRecommendedItems(item: TechnologyItem): boolean {
     switch (this.userRole) {

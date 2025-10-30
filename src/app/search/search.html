@@ -10,7 +10,7 @@
       <button [ngClass]="{'btn': true, 'btn-primary': searchText}"
               type="submit"
               [disabled]="!searchText"
-              (click)="onSearchClicked()">
+              (click)="setSearchText()">
         Search
       </button>
     </form>
