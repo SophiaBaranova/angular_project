@@ -30,17 +30,4 @@ export class TechnologyItemsList {
         return false;
     }
   }
-  showDetails(item: TechnologyItem): void {
-    console.log(
-      `Details:
-    - Name: ${item.name}
-    - Description: ${item.description}
-    - Type: ${item.type}
-    - Side: ${item.side}
-    - Author: ${item.author}
-    - Latest version: ${item.latestVersion}
-    - Official site: ${item.officialSite}
-    - License: ${item.openSource ? 'Open Source' : 'Proprietary'}`
-    );
-  }
 }
