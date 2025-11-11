@@ -18,7 +18,7 @@
       <strong>Latest version:</strong> {{ item.latestVersion }}
     </p>
     <p class="card-text">
-      <strong>Last updated:</strong> {{ item.lastUpdated | date }}
+      <strong>Last updated:</strong> {{ item.lastUpdated | timeAgo }}
     </p>
     <p class="card-text">
       <strong [ngClass]="item.openSource ? 'text-success' : 'text-danger'">
