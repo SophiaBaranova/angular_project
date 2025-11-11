@@ -1,12 +1,13 @@
 import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TechnologyItem } from '../core/models/technology-item.model';
-import { RouterModule, Routes, Router } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { HighlightDirective } from '../directives/highlight.directive';
 
 @Component({
   selector: 'app-technology-item-card',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, HighlightDirective],
   templateUrl: './technology-item-card.html',
   styleUrl: './technology-item-card.scss'
 })
