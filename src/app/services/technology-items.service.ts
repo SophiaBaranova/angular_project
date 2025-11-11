@@ -33,4 +33,9 @@ export class TechnologyItemsService {
     }
     return items;
   }
+  getItemById(itemId: number): Observable<TechnologyItem | undefined> {
+    return this.getFilteredItems().pipe(
+      map(items => items.find(item => item.id === itemId))
+    );
+  }
 }
