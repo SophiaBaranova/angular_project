@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TechnologyItem } from '../core/models/technology-item.model';
 import { TechnologyItemCard } from '../technology-item-card/technology-item-card';
-import {Search} from '../search/search';
+import { Search } from '../search/search';
 import { TechnologyItemsService } from '../services/technology-items.service';
 import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-technology-items-list',
@@ -13,11 +15,18 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './technology-items-list.html',
   styleUrl: './technology-items-list.scss',
 })
-export class TechnologyItemsList {
-  items$: Observable<TechnologyItem[]>;
+export class TechnologyItemsList implements OnInit {
+  items$: Observable<TechnologyItem[]> | undefined;
+  searchText: string = '';
   userRole!: 'designer' | 'developer' | 'fullstack';
   subscription: Subscription | undefined;
-  constructor(private technologyItemsService: TechnologyItemsService) {
+  constructor(private technologyItemsService: TechnologyItemsService,
+    private route: ActivatedRoute) {}
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe(params => {
+      this.searchText = params.get('search') || '';
+      this.technologyItemsService.setSearchText(this.searchText);
+    });
     this.items$ = this.technologyItemsService.getFilteredItems();
   }
   getRecommendedItems(item: TechnologyItem): boolean {
@@ -29,18 +38,5 @@ export class TechnologyItemsList {
       default:
         return false;
     }
-  }
-  showDetails(item: TechnologyItem): void {
-    console.log(
-      `Details:
-    - Name: ${item.name}
-    - Description: ${item.description}
-    - Type: ${item.type}
-    - Side: ${item.side}
-    - Author: ${item.author}
-    - Latest version: ${item.latestVersion}
-    - Official site: ${item.officialSite}
-    - License: ${item.openSource ? 'Open Source' : 'Proprietary'}`
-    );
   }
 }

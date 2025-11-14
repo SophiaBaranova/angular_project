@@ -1,0 +1,43 @@
+<div class="card mx-auto mt-4" style="max-width: 600px;" *ngIf="selectedItem$ | async as item">
+  <img [src]="'assets/' + item.logo"
+       class="card-img-top p-3"
+       style="object-fit: contain; height: 200px;"
+       alt="technology logo">
+  <div class="card-body">
+    <h4 class="card-title">
+      {{ item.name }}
+    </h4>
+    <p class="card-text">
+      <strong>Type:</strong> {{ item.type }} |
+      <strong>Side:</strong> {{ item.side }}
+    </p>
+    <p class="card-text">
+      <strong>Author:</strong> {{ item.author }}
+    </p>
+    <p class="card-text">
+      <strong>Latest version:</strong> {{ item.latestVersion }}
+    </p>
+    <p class="card-text">
+      <strong>Last updated:</strong> {{ item.lastUpdated | date }}
+    </p>
+    <p class="card-text">
+      <strong [ngClass]="item.openSource ? 'text-success' : 'text-danger'">
+        {{ item.openSource ? 'Open Source' : 'Proprietary' }}
+      </strong>
+    </p>
+    <p class="card-text mt-3">
+      {{ item.description }}
+    </p>
+    <div class="d-flex justify-content-between mt-4">
+      <a *ngIf="item.officialSite"
+         [href]="item.officialSite"
+         target="_blank"
+         class="btn btn-primary flex-fill me-2">
+        Visit Official Site
+      </a>
+      <button (click)="onBack()" class="btn btn-secondary flex-fill">
+        Back
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 export interface TechnologyItem {
+  id: number;
   name: string;
   description: string;
   type: 'language' | 'markup' | 'style' | 'framework' | 'tool';

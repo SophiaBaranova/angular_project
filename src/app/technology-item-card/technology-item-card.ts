@@ -1,20 +1,22 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TechnologyItem } from '../core/models/technology-item.model';
+import { RouterModule, Routes, Router } from '@angular/router';
 
 @Component({
   selector: 'app-technology-item-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './technology-item-card.html',
   styleUrl: './technology-item-card.scss'
 })
-export class TechnologyItemCard {
+export class TechnologyItemCard implements OnInit {
   @Input() item!: TechnologyItem;
   @Input() isRecommended!: boolean;
-  @Output() detailsClickedEvent = new EventEmitter<TechnologyItem>();
-  onShowDetails(){
-    this.detailsClickedEvent.emit(this.item);
+  itemId: number | undefined;
+  router: Router = inject(Router);
+  ngOnInit(): void {
+    this.itemId = this.item.id;
   }
   isNew(): boolean {
     if (!this.item?.lastUpdated) return false;
