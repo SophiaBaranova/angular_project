@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { TechnologyItemsService } from '../services/technology-items.service';
+import { TimeAgoPipe } from "../pipes/time-ago.pipe";
 
 
 @Component({
   selector: 'app-technology-item-details',
-  imports: [CommonModule],
+  imports: [CommonModule, TimeAgoPipe],
   templateUrl: './technology-item-details.html',
   styleUrl: './technology-item-details.scss'
 })
