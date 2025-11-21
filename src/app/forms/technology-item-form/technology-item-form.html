@@ -1,0 +1,87 @@
+<div class="container my-4 pb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+
+                <div class="mb-3">
+                    <label for="inputName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="inputName" formControlName="name" [class.is-invalid]="isInvalid('name')">
+                    <div class="invalid-feedback">Name is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDescription" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="inputDescription" formControlName="description" [class.is-invalid]="isInvalid('description')">
+                    <div class="invalid-feedback">Description is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <select class="form-select" formControlName="type" [class.is-invalid]="isInvalid('type')">
+                        <option value="" disabled>Choose type</option>
+                        <option value="language">language</option>
+                        <option value="markup">markup</option>
+                        <option value="style">style</option>
+                        <option value="framework">framework</option>
+                        <option value="tool">tool</option>
+                    </select>
+                    <div class="invalid-feedback">Type is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <select class="form-select" formControlName="side" [class.is-invalid]="isInvalid('side')">
+                        <option value="" disabled>Choose side</option>
+                        <option value="client">client</option>
+                        <option value="server">server</option>
+                        <option value="both">both</option>
+                    </select>
+                    <div class="invalid-feedback">Side is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputAuthor" class="form-label">Author</label>
+                    <input type="text" class="form-control" id="inputAuthor" formControlName="author" [class.is-invalid]="isInvalid('author')">
+                    <div class="invalid-feedback">Author is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputLastUpdated" class="form-label">Last updated</label>
+                    <input type="date" class="form-control" id="inputLastUpdated" formControlName="lastUpdated" [class.is-invalid]="isInvalid('lastUpdated')">
+                    <div class="invalid-feedback">Date is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputLatestVersion" class="form-label">Latest version</label>
+                    <input type="text" class="form-control" id="inputLatestVersion" formControlName="latestVersion" [class.is-invalid]="isInvalid('latestVersion')">
+                    <div class="invalid-feedback">Version is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputOfficialSite" class="form-label">Official site</label>
+                    <input type="url" class="form-control" id="inputOfficialSite" formControlName="officialSite" [class.is-invalid]="isInvalid('officialSite')">
+                    <div class="invalid-feedback">URL is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">License</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="openSource" id="radioTrue" [value]="true" formControlName="openSource">
+                        <label class="form-check-label" for="radioTrue">Open source</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="openSource" id="radioFalse" [value]="false" formControlName="openSource">
+                        <label class="form-check-label" for="radioFalse">Proprietary</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputLogo" class="form-label">Logo</label>
+                    <input type="url" id="inputLogo" placeholder="Logo URL" class="form-control" formControlName="logo" [class.is-invalid]="isInvalid('logo')">
+                    <div class="invalid-feedback">URL is required.</div>
+                </div>
+
+                <button type="submit" [ngClass]="{'btn': true, 'btn-primary': itemForm.valid}" [disabled]="itemForm.invalid">Create</button>
+
+            </form>
+        </div>
+    </div>
+</div>
