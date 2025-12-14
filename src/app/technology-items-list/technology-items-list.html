@@ -1,4 +1,9 @@
 <app-search class="ms-auto"></app-search>
+<a
+  [routerLink]="['/TechnologyItems/create']"
+  class="btn btn-warning flex-fill ms-3">
+  Add a new item
+</a>
 <div class="container my-4 px-1 pb-5 mb-5">
   <div *ngIf="(items$ | async) as items">
     <div *ngIf="!items.length">No items loaded!</div>

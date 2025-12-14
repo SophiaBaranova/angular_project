@@ -5,13 +5,13 @@ import { TechnologyItemCard } from '../technology-item-card/technology-item-card
 import { Search } from '../search/search';
 import { TechnologyItemsService } from '../services/technology-items.service';
 import { Observable, Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-technology-items-list',
   standalone: true,
-  imports: [CommonModule, TechnologyItemCard, Search],
+  imports: [CommonModule, RouterModule, TechnologyItemCard, Search],
   templateUrl: './technology-items-list.html',
   styleUrl: './technology-items-list.scss',
 })
