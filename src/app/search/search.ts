@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgClass} from '@angular/common';
-import { TechnologyItemsService } from '../services/technology-items.service';
+import { TechnologyItemsService } from '../services/technology-items.service/technology-items.service';
 import { Router } from '@angular/router';
 
 @Component({

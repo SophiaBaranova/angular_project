@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TechnologyItem } from '../core/models/technology-item.model';
 import { TechnologyItemCard } from '../technology-item-card/technology-item-card';
 import { Search } from '../search/search';
-import { TechnologyItemsService } from '../services/technology-items.service';
+import { TechnologyItemsService } from '../services/technology-items.service/technology-items.service';
 import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 

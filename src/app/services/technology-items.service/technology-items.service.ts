@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TechnologyItem } from '../core/models/technology-item.model';
+import { TechnologyItem } from '../../core/models/technology-item.model';
 import { BehaviorSubject, combineLatest, map, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
