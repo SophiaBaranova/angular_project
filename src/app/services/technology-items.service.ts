@@ -1,27 +1,18 @@
 import { Injectable } from '@angular/core';
 import { TechnologyItem } from '../core/models/technology-item.model';
-import { TECHNOLOGY_ITEMS } from '../mock-data/technology-items';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TechnologyItemsService {
-  private itemsSubject: BehaviorSubject<TechnologyItem[]>;
+  private apiURL = 'https://web-development-b3bc2-default-rtdb.firebaseio.com/items';
+  private itemsSubject = new BehaviorSubject<TechnologyItem[]>([]);
   private searchSubject = new BehaviorSubject<string>('');
   public searchSubject$ = this.searchSubject.asObservable();
-  constructor() {
-    // Load items from localStorage or fallback to mock data
-    const savedItems = localStorage.getItem('technologyItems');
-    const initialItems: TechnologyItem[] = savedItems
-    ? JSON.parse(savedItems) as TechnologyItem[]
-    : TECHNOLOGY_ITEMS;
-    // Normalize logos
-    const normalizedItems = initialItems.map(item => ({
-      ...item,
-      logo: this.getLogoUrl(item.logo)
-    }));
-    this.itemsSubject = new BehaviorSubject<TechnologyItem[]>(normalizedItems);
+  constructor(private http: HttpClient) {
+    this.loadItems();
   }
   // Observable of all items
   get items$(): Observable<TechnologyItem[]> {
@@ -46,21 +37,51 @@ export class TechnologyItemsService {
     return items;
   }
   // Find item by ID
-  getItemById(itemId: number): Observable<TechnologyItem | undefined> {
-    return this.getFilteredItems().pipe(
+  getItemById(itemId: string): Observable<TechnologyItem | undefined> {
+    return this.items$.pipe(
       map(items => items.find(item => item.id === itemId))
     );
   }
   // Add a new item
   createItem(item: TechnologyItem): void {
-    const items = this.itemsSubject.value;
-    const newId = items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1;
-    const newItem = { ...item, id: newId, logo: this.getLogoUrl(item.logo) };
-    const updatedItems = [...items, newItem];
-    // Update BehaviorSubject
-    this.itemsSubject.next(updatedItems);
-    // Persist to localStorage
-    localStorage.setItem('technologyItems', JSON.stringify(updatedItems));
+    const newItem = {
+      ...item,
+      logo: this.getLogoUrl(item.logo),
+    };
+    this.http
+    .post<{ name: string }>(`${this.apiURL}.json`, newItem)
+    .subscribe({
+      next: (res) => {
+        const createdItem: TechnologyItem = {
+          ...newItem,
+          id: res.name,
+        };
+        const updatedItems = [...this.itemsSubject.value, createdItem];
+        this.itemsSubject.next(updatedItems);
+      },
+      error: (err) => {
+        console.error('Failed to create item', err);
+      },
+    });
+  }
+  // Load all items from Firebase
+  private loadItems(): void {
+    this.http
+      .get<Record<string, Omit<TechnologyItem, 'id'>>>(`${this.apiURL}.json`)
+      .pipe(
+        map(data => {
+          if (!data) return [];
+          return Object.entries(data).map(([key, value]) => ({
+            ...value,
+            id: key,
+            logo: this.getLogoUrl(value.logo)
+          }));
+        }),
+        tap(items => this.itemsSubject.next(items))
+      )
+      .subscribe({
+        error: (err) => console.error('Failed to load items', err)
+      });
   }
   // Convert logo to full URL if needed
   private getLogoUrl(logo: string): string {
