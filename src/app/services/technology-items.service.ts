@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TechnologyItemsService {
-  private apiURL = 'https://web-development-b3bc2-default-rtdb.firebaseio.com/items';
+  private apiURL = 'items';
   private itemsSubject = new BehaviorSubject<TechnologyItem[]>([]);
   private searchSubject = new BehaviorSubject<string>('');
   public searchSubject$ = this.searchSubject.asObservable();
