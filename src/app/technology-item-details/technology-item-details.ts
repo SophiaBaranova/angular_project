@@ -15,13 +15,13 @@ import { TimeAgoPipe } from "../pipes/time-ago.pipe";
 })
 export class TechnologyItemDetails implements OnInit {
   selectedItem$!: Observable<TechnologyItem | undefined>;
-  itemId!: number;
+  itemId!: string;
   constructor(
     private technologyItemsService: TechnologyItemsService,
     private activatedRoute: ActivatedRoute
   ) { }
   ngOnInit(): void {
-    this.itemId = +this.activatedRoute.snapshot.paramMap.get('id')!;
+    this.itemId = this.activatedRoute.snapshot.paramMap.get('id')!;
     this.selectedItem$ = this.technologyItemsService.getItemById(this.itemId);
   }
   onBack(): void {

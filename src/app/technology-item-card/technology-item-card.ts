@@ -14,7 +14,7 @@ import { HighlightDirective } from '../directives/highlight.directive';
 export class TechnologyItemCard implements OnInit {
   @Input() item!: TechnologyItem;
   @Input() isRecommended!: boolean;
-  itemId: number | undefined;
+  itemId: string | undefined;
   router: Router = inject(Router);
   ngOnInit(): void {
     this.itemId = this.item.id;

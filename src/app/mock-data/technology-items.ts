@@ -2,7 +2,7 @@ import { TechnologyItem } from '../core/models/technology-item.model';
 
 export const TECHNOLOGY_ITEMS: TechnologyItem[] = [
   {
-    id: 1,
+    id: '1',
     name: 'HTML',
     description: 'A markup language for structuring web pages',
     type: 'markup',
@@ -15,7 +15,7 @@ export const TECHNOLOGY_ITEMS: TechnologyItem[] = [
     logo: 'logos/html.png'
   },
   {
-    id: 2,
+    id: '2',
     name: 'CSS',
     description: 'A style language for designing web pages',
     type: 'style',
@@ -28,7 +28,7 @@ export const TECHNOLOGY_ITEMS: TechnologyItem[] = [
     logo: 'logos/css.png'
   },
   {
-    id: 3,
+    id: '3',
     name: 'JavaScript',
     description: 'A programming language for client and server applications',
     type: 'language',
@@ -41,7 +41,7 @@ export const TECHNOLOGY_ITEMS: TechnologyItem[] = [
     logo: 'logos/js.png'
   },
   {
-    id: 4,
+    id: '4',
     name: 'Angular',
     description: 'A framework for building SPA applications',
     type: 'framework',
@@ -54,7 +54,7 @@ export const TECHNOLOGY_ITEMS: TechnologyItem[] = [
     logo: 'logos/angular.png'
   },
   {
-    id: 5,
+    id: '5',
     name: 'Node.js',
     description: 'A JavaScript runtime environment on the server',
     type: 'tool',
