@@ -3,7 +3,7 @@ import { TechnologyItem } from '../core/models/technology-item.model';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { TechnologyItemsService } from '../services/technology-items.service';
+import { TechnologyItemsService } from '../services/technology-items.service/technology-items.service';
 import { TimeAgoPipe } from "../pipes/time-ago.pipe";
 
 

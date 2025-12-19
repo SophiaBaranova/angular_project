@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TechnologyItemsService } from '../../services/technology-items.service';
+import { TechnologyItemsService } from '../../services/technology-items.service/technology-items.service';
 import { TechnologyItem } from '../../core/models/technology-item.model';
 
 
