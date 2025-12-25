@@ -1,23 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
-  let component: AuthService;
-  let fixture: ComponentFixture<AuthService>;
+  let service: AuthService;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AuthService]
-    })
-    .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [AuthService]
+    });
 
-    fixture = TestBed.createComponent(AuthService);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    service = TestBed.inject(AuthService);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should be created', () => {
+    expect(service).toBeTruthy();
   });
 });
